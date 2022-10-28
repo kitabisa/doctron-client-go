@@ -9,7 +9,6 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-	"time"
 
 	"github.com/google/go-querystring/query"
 	"github.com/lampnick/doctron-client-go/utils"
@@ -40,15 +39,13 @@ type Client struct {
 }
 
 //NewClient NewClient
-func NewClient(ctx context.Context, domain, username, password string) *Client {
+func NewClient(ctx context.Context, domain, username, password string, client *http.Client) *Client {
 	return &Client{
 		ctx:      ctx,
 		domain:   domain,
 		username: username,
 		password: password,
-		hc: &http.Client{
-			Timeout: time.Second * 60,
-		},
+		hc:       client,
 	}
 }
 
